@@ -12,7 +12,6 @@
 (declare send-info!)
 (def scheduler
   (sch/scheduler
-   ;; 玉山投顧
    {:esunconsulting {:handler (fn [_ _] (send-info!))
                      :schedule (:esunconsulting/schedule conf)
                      :params nil}}))
@@ -30,15 +29,9 @@
 (def ^:private
   channel (chan))
 
-(defn build-result-map []
-  (vec (into
-        (into (esunconsulting/get-report 3)
-              (esunconsulting/get-report 2))
-        (esunconsulting/get-report 1))))
-
 (defn send-info! []
   (timbre/info "--> esunconsulting scheduler trigger!!!!\n")
-  (doseq [data (build-result-map)]
+  (doseq [data (mapcat esunconsulting/get-report (range 1 4))]
     (put! channel data)))
 
 (defn to-message
