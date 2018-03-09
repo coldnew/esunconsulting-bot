@@ -1,8 +1,8 @@
 version: '2'
 services:
-  lein:
+  esunconsulting:
     build: ./docker/x86
-    container_name: lein
+    container_name: esunconsulting
     restart: always
     volumes:
      - $PWD:/data
