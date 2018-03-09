@@ -4,7 +4,7 @@
   :license {:name "GNU Affero General Public License 3.0 (AGPL-3.0)"
             :url "https://www.gnu.org/licenses/agpl-3.0.en.html"}
   :dependencies [[org.clojure/clojure "1.8.0"]
-                 [coldnew/esunconsulting "0.1.0-SNAPSHOT"]
+                 [coldnew/esunconsulting "0.1.0"]
                  [morse "0.2.4"]
                  [com.taoensso/timbre "4.7.4"]
                  [migratus "0.8.32"]
