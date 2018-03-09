@@ -1,0 +1,11 @@
+version: '2'
+services:
+  lein:
+    build: ./docker/x86
+    container_name: lein
+    restart: always
+    volumes:
+     - $PWD:/data
+     - ~/.m2:/root/.m2
+    environment:
+      CONFIG: <YOUR CONFIG FILE PATH>
