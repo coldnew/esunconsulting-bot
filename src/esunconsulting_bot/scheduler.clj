@@ -43,8 +43,8 @@
   (let [{:keys [title link] :as data} (<! channel)
         token (:esunconsulting/token conf)
         chat-id (:esunconsulting/chat-id conf)]
-    (timbre/info "<<<<<  " data)
     (when (not (db/esunconsulting-contains-link? link))
+      (timbre/info ">>>  " data)
       (telegram/send-text token chat-id {:parse_mode "HTML"} (to-message data))
       ;; Add link to db
       (db/esunconsulting-add-link (:link data)))
