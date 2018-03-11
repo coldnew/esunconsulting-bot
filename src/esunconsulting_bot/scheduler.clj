@@ -44,7 +44,6 @@
         token (:esunconsulting/token conf)
         chat-id (:esunconsulting/chat-id conf)]
     (when (not (db/esunconsulting-contains-link? link))
-      (timbre/info ">>>  " data)
       (telegram/send-text token chat-id {:parse_mode "HTML"} (to-message data))
       ;; Add link to db
       (db/esunconsulting-add-link (:link data)))
