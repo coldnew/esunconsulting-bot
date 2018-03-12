@@ -44,7 +44,13 @@
         token (:esunconsulting/token conf)
         chat-id (:esunconsulting/chat-id conf)]
     (when (not (db/esunconsulting-contains-link? link))
-      (telegram/send-text token chat-id {:parse_mode "HTML"} (to-message data))
-      ;; Add link to db
-      (db/esunconsulting-add-link (:link data)))
+      ;; only add link to db when send message to telegram success
+      (when (try (telegram/send-text token chat-id {:parse_mode "HTML"} (to-message data))
+                 true               ; send message to telegram success
+                 (catch Exception e
+                   (timbre/error (.getMessage e))
+                   false        ; false on sending message to telegram
+                   ))
+        ;; Add link to db
+        (db/esunconsulting-add-link (:link data))))
     (recur)))
