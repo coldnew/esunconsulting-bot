@@ -22,7 +22,7 @@ The first time to run this bot, you need to generate/migrate the database:
 lein run -- migrate
 ```
 
-the, just run
+then, just run
 
 ``` shell
 lein run
